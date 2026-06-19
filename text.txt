@@ -1,0 +1,256 @@
+==================================================================
+  INTERACTIVE REACT APP  -  STUDENT INSTRUCTIONS
+==================================================================
+
+WHAT YOU ARE BUILDING
+---------------------
+A small, responsive React app with an interactive widget (for
+example a counter, a like button, a to-do list, a theme toggle,
+a simple form - your choice). It must use React components, props,
+state, and event handling, and be styled with Tailwind CSS.
+
+NOTE: This project is bigger than the plain HTML/CSS/JS ones. You
+will use a build tool (Vite) and install packages with npm. The
+terminal commands in STEP 1 are SETUP commands (tooling) - the
+actual React code you write yourself in STEP 3.
+
+
+------------------------------------------------------------------
+STEP 0  -  FIND OUT WHERE YOU ARE (do this first!)
+------------------------------------------------------------------
+Open the terminal in VS Code:
+  Top menu  ->  Terminal  ->  New Terminal
+
+Type this and press Enter:
+
+    whoami && pwd
+
+  - "whoami" tells you your username.
+  - "pwd" tells you which folder you are currently in.
+
+Remember the folder it prints - this is where your project should
+live. Also check that Node and npm are installed:
+
+    node -v && npm -v
+
+If those print version numbers, you are good. If not, ask your
+instructor to confirm Node.js is available in the lab.
+
+
+------------------------------------------------------------------
+STEP 1  -  CREATE THE REACT PROJECT (terminal setup)
+------------------------------------------------------------------
+A React + Vite app cannot be created by clicking - it needs a few
+setup commands. Run them ONE AT A TIME in the terminal and read
+what each one says before running the next.
+
+  1. Make sure you are in your working folder (from STEP 0), then
+     create the Vite React project:
+
+         npm create vite@latest interactive-react-app -- --template react
+
+     If it asks you to confirm anything, accept the defaults.
+
+  2. Move into the new project folder:
+
+         cd interactive-react-app
+
+  3. Install the base dependencies:
+
+         npm install
+
+  4. Install Tailwind CSS and its tools:
+
+         npm install -D tailwindcss postcss autoprefixer
+         npx tailwindcss init -p
+
+     This creates "tailwind.config.js" and "postcss.config.js".
+
+  5. Start the dev server any time you want to see your app:
+
+         npm run dev
+
+     It will print a local URL (for example http://localhost:5173).
+     Open that link to view your app. Leave this running while you
+     work; it reloads automatically when you save. Press Ctrl+C in
+     the terminal to stop it.
+
+
+------------------------------------------------------------------
+STEP 2  -  CONFIGURE TAILWIND
+------------------------------------------------------------------
+Two small edits connect Tailwind to your app. Open these files
+from the Explorer on the left and edit them.
+
+  A. Open "tailwind.config.js". Find the "content" setting and
+     make sure it lists the files Tailwind should scan - your
+     index.html and everything under the src folder (the .js and
+     .jsx files). If Tailwind classes do nothing later, this
+     setting is the usual cause.
+
+  B. Open "src/index.css" (or the main CSS file the project uses).
+     Remove the starter styles and add the three Tailwind layer
+     directives that pull in Tailwind's base, components, and
+     utilities. (Look up "Tailwind directives" - there are exactly
+     three lines beginning with @tailwind.)
+
+  Make sure that CSS file is imported by your app's entry file
+  (usually "src/main.jsx").
+
+
+------------------------------------------------------------------
+STEP 3  -  WHAT TO BUILD (your React code)
+------------------------------------------------------------------
+This is YOUR code to write. The points below describe what is
+required. Try it yourself first - that is how you learn.
+
+  COMPONENTS (at least 2 reusable ones)
+    - Build at least two of your own components in the src folder
+      (for example a Button component and a Card component, or a
+      Header and a Widget). A component is just a function that
+      returns JSX.
+    - Use them inside App.jsx. Reusing the same component more
+      than once (with different props) is a great way to show it
+      is truly reusable.
+
+  PROPS
+    - Pass data INTO your components through props, so the same
+      component can display different content.
+
+  STATE
+    - Use the useState hook to manage at least one interactive
+      value (for example a count, an input's text, a toggle's
+      on/off, a list of items).
+    - When state changes, React re-renders and the UI updates.
+
+  EVENT HANDLING
+    - Handle at least one user event: onClick, onChange, onSubmit,
+      a toggle, etc. The event should change state, which updates
+      what the user sees.
+
+  TAILWIND STYLING + RESPONSIVENESS
+    - Style your app using Tailwind utility classes in the JSX
+      className attributes (for example padding, colours, flex,
+      grid, rounded corners).
+    - Make it RESPONSIVE: use Tailwind's responsive prefixes
+      (such as sm:, md:, lg:) so the layout looks good on both
+      small screens and large screens.
+
+  THINK ABOUT:
+    - What is the smallest piece of UI you could turn into a
+      reusable component?
+    - Which value on the page needs to be "remembered" and change
+      over time? That value belongs in state.
+    - After an event fires, what state changes, and what does the
+      user then see?
+
+
+------------------------------------------------------------------
+STEP 4  -  RUN AND TEST IN THE BROWSER
+------------------------------------------------------------------
+With "npm run dev" running, open the local URL it printed.
+  - Interact with your widget. Confirm the UI updates when you
+    click/type/toggle (this proves state + events work).
+  - Resize the browser window (or use the browser's device
+    toolbar) to confirm the layout adapts on small and large
+    screens (this proves responsiveness).
+  - Open the browser Console (F12) and check there are no red
+    errors.
+
+
+------------------------------------------------------------------
+STEP 5  -  CHECK YOUR WORK (run this before submitting!)
+------------------------------------------------------------------
+In the terminal, make sure you are inside your project folder:
+
+    cd interactive-react-app
+
+Then copy and paste this whole block and press Enter:
+
+----------------- COPY FROM HERE -----------------
+echo "Checking your project..."
+test -f package.json && echo "PASS: package.json exists" || echo "FAIL: package.json missing"
+test -f tailwind.config.js && echo "PASS: tailwind.config.js exists" || echo "FAIL: tailwind.config.js missing"
+ls src/App.jsx src/App.js 2>/dev/null | grep -q . && echo "PASS: App component exists" || echo "FAIL: src/App.jsx (or App.js) missing"
+ls src/main.jsx src/main.js 2>/dev/null | grep -q . && echo "PASS: main entry file exists" || echo "FAIL: src/main.jsx (or main.js) missing"
+grep -q '"react"' package.json && echo "PASS: react is a dependency" || echo "FAIL: react not in package.json"
+grep -q 'tailwindcss' package.json && echo "PASS: tailwindcss is installed" || echo "FAIL: tailwindcss not in package.json"
+grep -rEq 'useState' src && echo "PASS: state (useState) used" || echo "FAIL: no useState found in src"
+grep -rEq 'onClick|onChange|onSubmit|onToggle' src && echo "PASS: event handling found" || echo "FAIL: no event handlers found in src"
+grep -rEq 'className=' src && echo "PASS: className styling found" || echo "FAIL: no className styling found in src"
+test -d node_modules && echo "PASS: dependencies installed (node_modules)" || echo "FAIL: run 'npm install'"
+echo "Check complete."
+------------------ TO HERE ------------------
+
+
+------------------------------------------------------------------
+HOW TO KNOW YOU PASSED
+------------------------------------------------------------------
+After running the check block, read the output carefully.
+
+  - If EVERY line starts with "PASS:", your project has all the
+    required pieces. You should see 10 PASS lines and no FAILs.
+
+  - If ANY line starts with "FAIL:", that line tells you what is
+    missing. For example:
+        "FAIL: no useState found in src"
+            -> import and use the useState hook to manage an
+               interactive value.
+        "FAIL: no event handlers found in src"
+            -> add an onClick (or onChange/onSubmit) to a button
+               or input.
+        "FAIL: tailwindcss not in package.json"
+            -> re-run the Tailwind install command from STEP 1.
+
+  IMPORTANT: These checks only confirm the required PIECES are
+  present. They do NOT prove your app looks right or is truly
+  responsive. Always RUN your app (STEP 4), interact with it, and
+  resize the window before you submit.
+
+  Fix whatever failed, save the file (Ctrl+S), and run the check
+  block again. Repeat until all 10 lines say PASS.
+
+
+------------------------------------------------------------------
+STEP 6  -  SUBMIT
+------------------------------------------------------------------
+  1. Make sure all your files are SAVED (no white dots on tabs).
+  2. Confirm the check block shows all PASS.
+  3. Confirm the app runs and is interactive and responsive.
+  4. Write a concise README.md with setup and run instructions
+     (how to install and how to start the dev server).
+  5. Push your project to GitHub and submit your repository link.
+
+  TIP: Do NOT push the "node_modules" folder to GitHub. Vite
+  projects include a ".gitignore" that already excludes it - keep
+  that file.
+
+
+------------------------------------------------------------------
+COMMON PROBLEMS
+------------------------------------------------------------------
+  "Permission denied" when creating the project
+      -> You are in a folder you cannot write to. Run "pwd" and
+         build inside the folder it shows.
+
+  Tailwind classes have no effect
+      -> Check the "content" paths in tailwind.config.js, make
+         sure the @tailwind directives are in your CSS file, and
+         make sure that CSS file is imported in src/main.jsx.
+
+  "command not found: npm" or "node"
+      -> Node.js is not available in this terminal. Ask your
+         instructor to confirm it is installed.
+
+  The page is blank
+      -> Open the browser Console (F12) for red errors. A common
+         cause is a typo in JSX or a component that does not
+         "return" anything.
+
+  The terminal seems stuck after "npm run dev"
+      -> That is normal - the dev server stays running. Open the
+         printed URL in a browser. Press Ctrl+C to stop it.
+
+==================================================================
+  END OF INSTRUCTIONS
+==================================================================
